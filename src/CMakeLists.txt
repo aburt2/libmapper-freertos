@@ -12,3 +12,6 @@ add_subdirectory(lo)
 add_subdirectory(mapper)
 add_subdirectory(netinet)
 add_subdirectory(zlib)
+
+# Link mapper to osc
+target_link_libraries(mapper INTERFACE osc)

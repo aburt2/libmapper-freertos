@@ -61,9 +61,5 @@ add_executable(libmapper
     value.h
 )
 
-# Add subdirectories
-target_include_directories(libmapper PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
 # Link to library
-target_link_libraries(libmapper osc)
 target_link_libraries(libmapper mapper)

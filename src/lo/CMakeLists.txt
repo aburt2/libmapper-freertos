@@ -29,4 +29,3 @@ add_executable(liblo
 
 # Link to library
 target_link_libraries(liblo osc)
-target_link_libraries(liblo mapper)

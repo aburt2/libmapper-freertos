@@ -20,7 +20,7 @@
 #ifndef COMPONENTS_LIBMAPPER_ESP_COMPAT_IDF_INCLUDE_IFADDRS_H_
 #define COMPONENTS_LIBMAPPER_ESP_COMPAT_IDF_INCLUDE_IFADDRS_H_
 
-#include <arpa/inet.h>
+#include <lwip/inet.h>
 #include <netinet/in.h>
 #include <string.h>
 #include <sys/socket.h>

@@ -55,7 +55,7 @@
 #include <poll.h>
 #endif
 #include <sys/un.h>
-#include <arpa/inet.h>
+#include <lwip/inet.h>
 #include <netinet/in.h>
 #ifdef HAVE_GETIFADDRS
 #include <ifaddrs.h>

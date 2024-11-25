@@ -14,7 +14,7 @@
 #endif
 
 #ifdef HAVE_ARPA_INET_H
- #include <arpa/inet.h>
+ #include <lwip/inet.h>
 #else
  #ifdef HAVE_WINSOCK2_H
   #include <winsock2.h>

@@ -40,7 +40,7 @@
 #include <sys/un.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
-#include <arpa/inet.h>
+#include <lwip/inet.h>
 #include <unistd.h>
 #include <netinet/tcp.h>
 #endif

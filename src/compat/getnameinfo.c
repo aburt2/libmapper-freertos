@@ -17,7 +17,7 @@
 
 */
 
-#include <arpa/inet.h>
+#include <lwip/inet.h>
 #include <net/if.h>
 #include <netdb.h>
 #include <stddef.h>

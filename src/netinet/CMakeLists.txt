@@ -1,6 +1,9 @@
 # Add file
-add_library(netinet INTERFACE)
-target_include_directories(netinet INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+add_executable(netinet 
+   netinet.c
+   in.h
+   tcp.h
+)
 
 # Link to library
-target_link_libraries(netinet INTERFACE mapper)
+target_link_libraries(netinet mapper)

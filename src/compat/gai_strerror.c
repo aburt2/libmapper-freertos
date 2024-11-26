@@ -17,8 +17,8 @@
 
 */
 
-#include "compat.h"
-#include "lwip/netdb.h"
+#include <compat.h>
+#include <compat/posix/netdb.h>
 
 const char *gai_strerror(int errnum) {
   switch (errnum) {

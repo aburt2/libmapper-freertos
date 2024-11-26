@@ -33,8 +33,8 @@
 #include <iphlpapi.h>
 #else
 #include <unistd.h>
-#include <netdb.h>
-#include <sys/socket.h>
+#include <compat/posix/netdb.h>
+#include <compat/posix/sys/socket.h>
 #include <sys/un.h>
 #include <lwip/inet.h>
 #include <netinet/tcp.h>

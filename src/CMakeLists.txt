@@ -1,5 +1,5 @@
 # Add subdirectories
-target_include_directories(mapper INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(mapper INTERFACE .)
 
 # Add subdirectories
 add_subdirectory(compat)

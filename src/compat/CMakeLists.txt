@@ -7,5 +7,4 @@ add_executable(compat
 )
 
 # Link to library
-target_link_libraries(compat osc)
 target_link_libraries(compat mapper)

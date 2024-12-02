@@ -7,7 +7,7 @@
 
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/types.h>
-#include <compat/posix/sys/socket.h>
+#include <sys/socket.h>
 #endif
 
 #ifdef HAVE_POLL
@@ -21,7 +21,7 @@
 #ifndef ESP_PLATFORM
 #define closesocket close
 #endif
-#include <compat/posix/netdb.h>
+#include <netdb.h>
 #include <netinet/in.h>
 #include "lwip/inet.h"
 #endif

@@ -49,8 +49,8 @@
 #define EADDRINUSE WSAEADDRINUSE
 #endif
 #else
-#include <compat/posix/netdb.h>
-#include <compat/posix/sys/socket.h>
+#include <netdb.h>
+#include <sys/socket.h>
 #ifdef HAVE_POLL
 #include <poll.h>
 #endif

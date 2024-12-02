@@ -5,7 +5,6 @@ add_executable(liblo
     bundle.c
     message.c
     method.c
-    osc.c
     pattern_match.c
     send.c
     server_thread.c

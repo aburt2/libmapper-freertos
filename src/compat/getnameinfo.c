@@ -23,6 +23,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include "compat.h"
+#define	NI_NUMERICSERV  0x00000008
 
 int getnameinfo(const struct sockaddr *addr, socklen_t addrlen, char *host,
                 socklen_t hostlen, char *serv, socklen_t servlen, int flag) {

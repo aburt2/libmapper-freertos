@@ -61,5 +61,10 @@ add_executable(libmapper
     value.h
 )
 
+target_include_directories(libmapper PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/../expression
+    ${CMAKE_CURRENT_SOURCE_DIR}/../util
+)
+
 # Link to library
 target_link_libraries(libmapper mapper)

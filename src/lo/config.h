@@ -12,12 +12,13 @@
 
 /* Define this to enable threads. */
 #define ENABLE_THREADS 1
+#define _POSIX_THREADS 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the 'getifaddrs' function. */
-#define HAVE_GETIFADDRS 1
+// #define HAVE_GETIFADDRS 1
 
 /* Define to 1 if inet_pton() is available. */
 #define HAVE_INET_PTON 1
@@ -38,7 +39,7 @@
 #define HAVE_NETINET_IN_H 1
 
 /* Define to 1 if poll() is available. */
-#define HAVE_POLL 1
+// #define HAVE_POLL 1
 
 /* Define to 1 if select() is available. */
 #define HAVE_SELECT 1

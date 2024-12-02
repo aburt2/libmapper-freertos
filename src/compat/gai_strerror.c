@@ -18,7 +18,7 @@
 */
 
 #include <compat.h>
-#include <compat/posix/netdb.h>
+#include <netdb.h>
 
 const char *gai_strerror(int errnum) {
   switch (errnum) {

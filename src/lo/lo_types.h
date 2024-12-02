@@ -29,7 +29,7 @@ extern "C" {
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #else
-#include <compat/posix/netdb.h>
+#include <netdb.h>
 #endif
 
 #include "lo/lo_osc_types.h"

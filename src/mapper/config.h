@@ -121,7 +121,7 @@
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "2.4.12"
+#define LIBMAPPER_VERSION "2.4.12"
 
 /* Define to empty if 'const' does not conform to ANSI C. */
 /* #undef const */

@@ -33,8 +33,8 @@
 #include <iphlpapi.h>
 #else
 #include <unistd.h>
-#include <compat/posix/netdb.h>
-#include <compat/posix/sys/socket.h>
+#include <netdb.h>
+#include <sys/socket.h>
 #include <sys/un.h>
 #include <lwip/inet.h>
 #include <netinet/tcp.h>
@@ -47,6 +47,7 @@
 #include "lo_internal.h"
 #include "lo/lo.h"
 #include "lo/lo_throw.h"
+#define	NI_NUMERICSERV  0x00000008
 
 static void lo_address_set_flags(lo_address t, int flags);
 

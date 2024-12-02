@@ -23,7 +23,7 @@
 #include <lwip/inet.h>
 #include <netinet/in.h>
 #include <string.h>
-#include <compat/posix/sys/socket.h>
+#include <sys/socket.h>
 
 #define IFF_UP 0x1           /* interface is up      */
 #define IFF_BROADCAST 0x2    /* broadcast address valid  */

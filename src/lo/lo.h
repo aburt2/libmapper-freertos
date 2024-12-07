@@ -17,10 +17,6 @@
 #ifndef LO_H
 #define LO_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * \file lo.h The liblo main headerfile and high-level API functions.
  */
@@ -264,9 +260,5 @@ void lo_version(char *verstr, int verstr_size,
 /** @} */
 
 #include "lo/lo_macros.h"
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

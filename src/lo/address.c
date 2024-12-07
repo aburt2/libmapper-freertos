@@ -35,8 +35,8 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <sys/socket.h>
-#include <sys/un.h>
-#include <lwip/inet.h>
+#include <zephyr/net/net_ip.h>
+#include <arpa/inet.h>
 #include <netinet/tcp.h>
 #ifdef HAVE_GETIFADDRS
 #include <ifaddrs.h>

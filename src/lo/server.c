@@ -54,8 +54,8 @@
 #ifdef HAVE_POLL
 #include <poll.h>
 #endif
-#include <sys/un.h>
-#include <lwip/inet.h>
+#include <zephyr/net/net_ip.h>
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #ifdef HAVE_GETIFADDRS
 #include <ifaddrs.h>
@@ -613,7 +613,7 @@ lo_server lo_server_new_with_proto_internal(const char *group,
                 int opt = 1;
                 setsockopt(s->sockets[0].fd, SOL_SOCKET, SO_BROADCAST,
 						   (char*)&opt, sizeof(int));
-                setsockopt(s->sockets[0].fd, IPPROTO_IP, IP_MULTICAST_LOOP,
+                setsockopt(s->sockets[0].fd, IPPROTO_IP, IP_MULTICAST_TTL,
                            (char*)&opt, sizeof(int));
             }
         }
@@ -740,7 +740,7 @@ lo_server lo_server_new_with_proto_internal(const char *group,
 int lo_server_join_multicast_group(lo_server s, const char *group,
                                    int fam, const char *iface, const char *ip)
 {
-    struct ip_mreq mreq;
+    struct ip_mreqn mreq;
     memset(&mreq, 0, sizeof(mreq));
 
     // TODO ipv6 support here
@@ -778,7 +778,7 @@ int lo_server_join_multicast_group(lo_server s, const char *group,
     }
     else
 #endif // HAVE_GETIFADDRS
-        mreq.imr_interface.s_addr = htonl(INADDR_ANY);
+        mreq.imr_address.s_addr = htonl(INADDR_ANY);
 
     if (setsockopt(s->sockets[0].fd, IPPROTO_IP, IP_ADD_MEMBERSHIP,
                    (char*)&mreq, sizeof(mreq)) < 0) {
@@ -1280,7 +1280,7 @@ void *lo_server_recv_raw_stream(lo_server s, size_t * size, int *psock)
     int sock = -1;
 #ifdef HAVE_SELECT
 #ifndef HAVE_POLL
-    fd_set ps;
+    struct pollfd ps;
     int nfds = 0;
 #endif
 #endif
@@ -1405,7 +1405,7 @@ int lo_servers_wait(lo_server *s, int *status, int num_servers, int timeout)
     lo_timetag now, then;
 #ifdef HAVE_SELECT
 #ifndef HAVE_POLL
-    fd_set ps;
+    struct pollfd ps;
     struct timeval stimeout;
     struct sockaddr_storage addr;
     socklen_t addr_len = sizeof(addr);
@@ -1638,7 +1638,7 @@ int lo_server_recv(lo_server s)
     int i;
 #ifdef HAVE_SELECT
 #ifndef HAVE_POLL
-    fd_set ps;
+    struct pollfd ps;
     struct timeval stimeout;
     int res, nfds = 0;
 #endif

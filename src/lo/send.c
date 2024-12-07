@@ -37,10 +37,10 @@
 #else
 #include <netdb.h>
 #include <sys/socket.h>
-#include <sys/un.h>
+#include <zephyr/net/net_ip.h>
 #include <net/if.h>
 // #include <sys/ioctl.h>
-#include <lwip/inet.h>
+#include <arpa/inet.h>
 #include <unistd.h>
 #include <netinet/tcp.h>
 #endif
@@ -62,6 +62,7 @@ int initWSock();
 #else
 #define geterror() errno
 #endif
+
 
 static int create_socket(lo_address a);
 static int send_data(lo_address a, lo_server from, char *data,

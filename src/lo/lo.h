@@ -17,16 +17,20 @@
 #ifndef LO_H
 #define LO_H
 
-/**
- * \file lo.h The liblo main headerfile and high-level API functions.
- */
-
 #include "lo/lo_endian.h"
 #include "lo/lo_types.h"
 #include "lo/lo_osc_types.h"
 #include "lo/lo_errors.h"
 #include "lo/lo_lowlevel.h"
 #include "lo/lo_serverthread.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * \file lo.h The liblo main headerfile and high-level API functions.
+ */
 
 /**
  * \defgroup liblo High-level OSC API
@@ -258,6 +262,10 @@ void lo_version(char *verstr, int verstr_size,
                 int *lt_major, int *lt_minor, int *lt_bug);
 
 /** @} */
+
+#ifdef __cplusplus
+}
+#endif
 
 #include "lo/lo_macros.h"
 

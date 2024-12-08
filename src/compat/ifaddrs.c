@@ -25,52 +25,52 @@
 
 
 int getifaddrs(struct ifaddrs **ifap) {
-  // Get first network interface
-  esp_netif_t *esp_netif = esp_netif_next(NULL);
+//   // Get first network interface
+//   esp_netif_t *esp_netif = esp_netif_next(NULL);
 
-  struct ifaddrs *tmp;
-  tmp = NULL;
-  net_if_foreach();
+//   struct ifaddrs *tmp;
+//   tmp = NULL;
+//   net_if_foreach();
 
-  while (esp_netif) {
-    struct ifaddrs *ifa = (struct ifaddrs *)malloc(sizeof(struct ifaddrs));
-    struct sockaddr_in *sa;
+//   while (esp_netif) {
+//     struct ifaddrs *ifa = (struct ifaddrs *)malloc(sizeof(struct ifaddrs));
+//     struct sockaddr_in *sa;
 
-    memset(ifa, 0, sizeof(struct ifaddrs));
+//     memset(ifa, 0, sizeof(struct ifaddrs));
 
-    // Flags
-    ifa->ifa_flags = esp_netif_is_netif_up(esp_netif) ? IFF_UP : 0;
+//     // Flags
+//     ifa->ifa_flags = esp_netif_is_netif_up(esp_netif) ? IFF_UP : 0;
 
-    // Name
-    const int NAME_LENGTH = 6;
-    ifa->ifa_name = malloc(NAME_LENGTH);
-    esp_netif_get_netif_impl_name(esp_netif, ifa->ifa_name);
+//     // Name
+//     const int NAME_LENGTH = 6;
+//     ifa->ifa_name = malloc(NAME_LENGTH);
+//     esp_netif_get_netif_impl_name(esp_netif, ifa->ifa_name);
 
-    // Address
-    esp_netif_ip_info_t ip_info;
-    esp_netif_get_ip_info(esp_netif, &ip_info);
+//     // Address
+//     esp_netif_ip_info_t ip_info;
+//     esp_netif_get_ip_info(esp_netif, &ip_info);
 
-    // Add ip address to struct
-    ifa->ifa_addr = (struct sockaddr *)malloc(sizeof(struct sockaddr_in));
-    sa = (struct sockaddr_in *)ifa->ifa_addr;
-    sa->sin_family = AF_INET;
-    sa->sin_addr.s_addr = ip_info.ip.addr;
+//     // Add ip address to struct
+//     ifa->ifa_addr = (struct sockaddr *)malloc(sizeof(struct sockaddr_in));
+//     sa = (struct sockaddr_in *)ifa->ifa_addr;
+//     sa->sin_family = AF_INET;
+//     sa->sin_addr.s_addr = ip_info.ip.addr;
 
-    ifa->ifa_next = NULL;
+//     ifa->ifa_next = NULL;
 
-    // If head save node, else link to previous
-    if (tmp == NULL) {
-      tmp = ifa;
-    } else {
-      tmp->ifa_next = ifa;
-      tmp = tmp->ifa_next;
-    }
+//     // If head save node, else link to previous
+//     if (tmp == NULL) {
+//       tmp = ifa;
+//     } else {
+//       tmp->ifa_next = ifa;
+//       tmp = tmp->ifa_next;
+//     }
 
-    // Get next network interface
-    esp_netif = esp_netif_next(esp_netif);
-  }
+//     // Get next network interface
+//     esp_netif = esp_netif_next(esp_netif);
+//   }
 
-  *ifap = tmp;
+//   *ifap = tmp;
 
   return 0;
 }

@@ -20,71 +20,75 @@
 #include <ifaddrs.h>
 #include <net/if.h>
 #include <netinet/in.h>
+#include <zephyr/net/net_if.h>
 #include <string.h>
 #include <sys/socket.h>
 
 
 int getifaddrs(struct ifaddrs **ifap) {
-//   // Get first network interface
-//   esp_netif_t *esp_netif = esp_netif_next(NULL);
+  // Get first network interface
+  struct net_if *iface = net_if_get_wifi_sta();
 
-//   struct ifaddrs *tmp;
-//   tmp = NULL;
-//   net_if_foreach();
+  struct ifaddrs *tmp;
+  tmp = NULL;
 
-//   while (esp_netif) {
-//     struct ifaddrs *ifa = (struct ifaddrs *)malloc(sizeof(struct ifaddrs));
-//     struct sockaddr_in *sa;
+  while (iface) {
+    struct ifaddrs *ifa = (struct ifaddrs *)malloc(sizeof(struct ifaddrs));
+    struct sockaddr_in *sa;
 
-//     memset(ifa, 0, sizeof(struct ifaddrs));
+    memset(ifa, 0, sizeof(struct ifaddrs));
 
-//     // Flags
-//     ifa->ifa_flags = esp_netif_is_netif_up(esp_netif) ? IFF_UP : 0;
+    // Flags
+    ifa->ifa_flags = (net_if_flag_is_set(iface, NET_IF_UP));
 
-//     // Name
-//     const int NAME_LENGTH = 6;
-//     ifa->ifa_name = malloc(NAME_LENGTH);
-//     esp_netif_get_netif_impl_name(esp_netif, ifa->ifa_name);
+    // Name
+    const int NAME_LENGTH = 6;
+    ifa->ifa_name = malloc(NAME_LENGTH);
+    ifa->ifa_name = iface->config.name;
 
-//     // Address
-//     esp_netif_ip_info_t ip_info;
-//     esp_netif_get_ip_info(esp_netif, &ip_info);
+    // Add ip address to struct
+    ifa->ifa_addr = (struct sockaddr *)malloc(sizeof(struct sockaddr_in));
+    sa = (struct sockaddr_in *)ifa->ifa_addr;
+    sa->sin_family = AF_INET;
 
-//     // Add ip address to struct
-//     ifa->ifa_addr = (struct sockaddr *)malloc(sizeof(struct sockaddr_in));
-//     sa = (struct sockaddr_in *)ifa->ifa_addr;
-//     sa->sin_family = AF_INET;
-//     sa->sin_addr.s_addr = ip_info.ip.addr;
+    // Get IP address
+    for (int i = 0; i < NET_IF_MAX_IPV4_ADDR; i++) {
+      if (iface->config.ip.ipv4->unicast[i].ipv4.addr_type != NET_ADDR_DHCP) {
+          continue;
+      }
 
-//     ifa->ifa_next = NULL;
+      sa->sin_addr.s_addr = iface->config.ip.ipv4->unicast[i].ipv4.address.in_addr.s_addr;
+    }
 
-//     // If head save node, else link to previous
-//     if (tmp == NULL) {
-//       tmp = ifa;
-//     } else {
-//       tmp->ifa_next = ifa;
-//       tmp = tmp->ifa_next;
-//     }
+    ifa->ifa_next = NULL;
 
-//     // Get next network interface
-//     esp_netif = esp_netif_next(esp_netif);
-//   }
+    // If head save node, else link to previous
+    if (tmp == NULL) {
+      tmp = ifa;
+    } else {
+      tmp->ifa_next = ifa;
+      tmp = tmp->ifa_next;
+    }
 
-//   *ifap = tmp;
+    // Get next network interface
+    iface = NULL; // for now only get first wifi interface
+  }
+
+  *ifap = tmp;
 
   return 0;
 }
-
 void freeifaddrs(struct ifaddrs *ifa) {
-  struct ifaddrs *p, *q;
-  for (p = ifa; p;) {
-    free(p->ifa_name);
-    if (p->ifa_addr) free(p->ifa_addr);
-    if (p->ifa_dstaddr) free(p->ifa_dstaddr);
-    if (p->ifa_netmask) free(p->ifa_netmask);
-    if (p->ifa_data) free(p->ifa_data);
-    q = p;
-    p = p->ifa_next;
-    free(q);
-  }
+  // struct ifaddrs *p, *q;
+  // for (p = ifa; p;) {
+  //   free(p->ifa_name);
+  //   if (p->ifa_addr) free(p->ifa_addr);
+  //   if (p->ifa_dstaddr) free(p->ifa_dstaddr);
+  //   if (p->ifa_netmask) free(p->ifa_netmask);
+  //   if (p->ifa_data) free(p->ifa_data);
+  //   q = p;
+  //   p = p->ifa_next;
+  //   free(q);
+  // }
+  free(ifa);
 }

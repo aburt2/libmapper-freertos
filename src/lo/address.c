@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
+#include "strdup.h"
 
 #if defined(WIN32) || defined(_MSC_VER)
 #include <io.h>
@@ -47,7 +48,6 @@
 #include "lo_internal.h"
 #include "lo/lo.h"
 #include "lo/lo_throw.h"
-#define	NI_NUMERICSERV  0x00000008
 
 static void lo_address_set_flags(lo_address t, int flags);
 

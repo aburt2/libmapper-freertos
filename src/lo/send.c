@@ -288,7 +288,7 @@ static int is_local_broadcast(struct addrinfo *ai){
 
 static int is_broadcast(struct addrinfo *ai) {
     struct sockaddr_in *si = (struct sockaddr_in *) ai->ai_addr;
-    unsigned char *ip = (unsigned char *) &(si->sin_addr);
+    unsigned char *ip = (unsigned char *) &(si->sin_addr.s4_addr);
     if(AF_INET == ai->ai_family) {
         // is it the "global" broadcast address?
         if (ip[0] == 255 && ip[1] == 255 && ip[2] == 255 && ip[3] == 255)

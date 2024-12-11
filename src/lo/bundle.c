@@ -25,6 +25,7 @@
 
 #include "lo_types_internal.h"
 #include "lo/lo.h"
+#include "strdup.h"
 
 lo_bundle lo_bundle_new(lo_timetag tt)
 {

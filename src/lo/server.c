@@ -29,6 +29,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <time.h>
+#include <strdup.h>
 
 #ifdef _MSC_VER
 #define _WINSOCKAPI_
@@ -389,13 +390,7 @@ void lo_server_resolve_hostname(lo_server s)
 
     /* Fallback to the oldschool (i.e. more reliable) way */
     if (!hostname[0]) {
-        struct hostent *he;
-
         gethostname(hostname, sizeof(hostname));
-        he = gethostbyname(hostname);
-        if (he) {
-            strncpy(hostname, he->h_name, sizeof(hostname) - 1);
-        }
     }
 
     /* somethings gone really wrong, just hope its local only */
@@ -772,7 +767,7 @@ int lo_server_join_multicast_group(lo_server s, const char *group,
           return err;
         }
 
-        mreq.imr_interface = s->addr_if.a.addr;
+        mreq.imr_address = s->addr_if.a.addr;
         // TODO: the above assignment is for an in_addr, which assumes IPv4
         //       how to specify group membership interface with IPv6?
     }

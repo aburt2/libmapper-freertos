@@ -62,7 +62,7 @@ void lo_arg_pp_internal(lo_type type, void *data, int bigendian);
 // highest power of 2.
 #if 1
 #define lo_pow2_over(a,b) \
-    a = ((b > a) ? (a << ((int)((log(((double)b/(double)a))/0.69315)+1))) : a);
+    a = ((b > a) ? (a << ((int)((log2f((float)b/(float)a))+1))) : a);
 #else
 #define lo_pow2_over(a,b) \
     while (b > a) {a *= 2;}

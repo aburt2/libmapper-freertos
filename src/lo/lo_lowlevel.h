@@ -134,6 +134,20 @@ int lo_send_bundle(lo_address targ, lo_bundle b);
  */
 int lo_send_bundle_from(lo_address targ, lo_server serv, lo_bundle b);
 
+
+/**
+ * \brief Send a lo_bundle object to address targ from address of serv
+ *
+ * Bundles are constructed with the
+ * lo_bundle_new() and lo_bundle_add_message() functions.
+ *
+ * \param targ The address to send the bundle to
+ * \param serv The server socket to send the bundle from 
+ *              (can be NULL to use new socket)
+ * \param b    The bundle itself
+ */
+int lo_send_serialised_bundle_from(lo_address a, lo_server from, char *data, const size_t data_len);
+
 /**
  * \brief Create a new lo_message object
  */

@@ -606,4 +606,10 @@ int lo_send_bundle_from(lo_address a, lo_server from, lo_bundle b)
     return ret;
 }
 
+int lo_send_serialised_bundle_from(lo_address a, lo_server from, char *data, const size_t data_len)
+{
+    // Send the bundle
+    int ret = send_data(a, from, data, data_len);
+    return ret;
+}
 /* vi:set ts=8 sts=4 sw=4: */

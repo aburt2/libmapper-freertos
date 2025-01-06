@@ -40,12 +40,14 @@ class oscBundle {
         int update_message(int i, size_t size, int *data);
         int update_message(int i, int data);
         int update_message(int i, float data);
+        int update_message(int i, double data);
         int update_message(int i, lo_timetag data);
 
         // Add data
         void add(int *idx,const char *path, lo_timetag value);
         void add(int *idx,const char *path, int value);
         void add(int *idx,const char *path, float value);
+        void add(int *idx,const char *path, double value);
         void add(int *idx,const char *path, size_t size, int *value);
         void add(int *idx,const char *path, size_t size,  float *value);
         void add(int *idx,const char *path, lo_message msg);

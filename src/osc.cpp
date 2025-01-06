@@ -61,6 +61,17 @@ int oscBundle::update_message(int i, float data) {
     return 0;
 }
 
+int oscBundle::update_message(int i, double data) {
+    // Update specific message
+    if (i >= num_messages) {
+        return 1; // return 1 on failure
+    }   
+
+    // Update the message
+    memcpy((char *)bundle->elmnts[i].content.message.msg->data, &data, sizeof(double));
+    return 0;
+}
+
 int oscBundle::update_message(int i, lo_timetag data) {
     // Update specific message
     if (i >= num_messages) {
@@ -110,6 +121,21 @@ void oscBundle::add(int *idx, const char *path, float value) {
     msg_typelen[num_messages] = 4;
     add(idx, oscNamespace.c_str(), tmp_osc);
 }
+
+void oscBundle::add(int *idx, const char *path, double value) {
+    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), path);
+    int ret = 0;
+    lo_message tmp_osc = lo_message_new();
+    ret = lo_message_add_double(tmp_osc, value);
+    if (ret < 0) {
+        lo_message_free(tmp_osc);
+        return;
+    }
+    // Add message to bundle
+    msg_typelen[num_messages] = 8;
+    add(idx, oscNamespace.c_str(), tmp_osc);
+}
+
 void oscBundle::add(int *idx, const char *path, size_t size, int *value) {
     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), path);
     lo_message tmp_osc = lo_message_new();
@@ -290,8 +316,16 @@ int oscBundle::lo_message_serialise_fast(int msg_idx, lo_message m, const char *
 }
 
 inline void fast_reorder(size_t len, int num, void *data) {
-    for (int i = 0; i < num; ++i) {
-        *(int32_t *) data = __builtin_bswap32(*(int32_t *) data);
-        data += len;
+    if (len == 4) {
+        for (int i = 0; i < num; ++i) {
+            *(int32_t *) data = __builtin_bswap32(*(int32_t *) data);
+            data += len;
+        }
+    } else if (len == 8) {
+        for (int i = 0; i < num; ++i) {
+            *(int64_t *) data = lo_htoo64(*(int64_t *) data);
+            data += len;
+        }
     }
+
 }

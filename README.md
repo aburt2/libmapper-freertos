@@ -1,7 +1,7 @@
-# libmapper-arduino <img style="float:right;padding:10px" src="http://libmapper.github.io/images/libmapper_logo_black_512px.png" width="100">
-- An Arduino library for using libmapper.
-- Works with ESP32 only.
-- Tested with arduino-esp32 v1.0.6.
+# libmapper-zephyr <img style="float:right;padding:10px" src="http://libmapper.github.io/images/libmapper_logo_black_512px.png" width="100">
+- A Zephyr library for using libmapper.
+- Works with the Zephyr RTOS environment
+- Tested with Zephyr v4.1 with an NXP-RW612 SoC 
 
 ## Installation
 * Clone or download this repository as zip into libraries folder
